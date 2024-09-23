@@ -1,0 +1,36 @@
+{
+  "exclude": [
+    "node_modules",
+    "dist",
+    "**/*.spec.ts",
+    "**/*.d.ts"
+  ],
+  "compilerOptions": {
+    "baseUrl": "./src",
+    "outDir": "./dist",
+    // "sourceMap": true,
+    // "declaration": true,
+    "strict": true,
+    "noImplicitAny": true,
+    "pretty": false,
+    "moduleResolution": "node",
+    "esModuleInterop": true,
+    "skipDefaultLibCheck": true, /* Skip type checking .d.ts files that are included with TypeScript. */
+    "skipLibCheck": true, /* Skip type checking all .d.ts files. */
+    "resolveJsonModule": true,
+    "allowJs": true,
+    "lib": [
+      "esnext",
+      "dom"
+    ],
+    "module": "commonjs",
+    "target": "esnext",
+    "types": [
+      "jest",
+      "node"
+    ]
+  },
+  "include": [
+    "./src/**/*.ts",
+  ]
+}
