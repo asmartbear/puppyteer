@@ -700,6 +700,13 @@ export class PuppyteerPage {
     }
 
     /**
+     * Press and release the "escape" key in this page.
+     */
+    async pressEscape() {
+        await this.page.keyboard.press('Escape')
+    }
+
+    /**
      * Acquire the active-page mutex, and become the active page
      */
     private async acquireActivePage() {

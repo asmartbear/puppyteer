@@ -14,6 +14,11 @@ export type BrowserOptions<Tags extends string> = {
     height?: number,
 
     /**
+     * If true, tune settings for a slow network.
+     */
+    slowNetwork?: boolean,
+
+    /**
      * The Chrome profile to use.  If not provided, uses the system default.
      * The '~' is allowed, and is resolved to the user's home directory.
      */
@@ -88,6 +93,7 @@ export class Puppyteer<Tags extends string> {
     public readonly headless: boolean
     public readonly profilePath: string | undefined
     public readonly logActivity: boolean
+    public readonly slowNetwork: boolean
 
     /**
      * The living browser instance, if one was created.
@@ -126,6 +132,7 @@ export class Puppyteer<Tags extends string> {
         this.profilePath = options.profilePath ? resolvePath(options.profilePath) : undefined
         this.taskRunner = new TaskRunner<Tags>(options.taskRunner)
         this.logActivity = options.logActivity || false
+        this.slowNetwork = options.slowNetwork || false
     }
 
     /**
@@ -158,7 +165,7 @@ export class Puppyteer<Tags extends string> {
                     // `--single-process`,
                     this.headless ? '--disable-gl-drawing-for-tests' : '',
                 ],
-                protocolTimeout: 2000,      // typically 180_000!
+                protocolTimeout: this.slowNetwork ? 20000 : 5000,      // typically 180_000!
             });
 
             // Accumulate any pages it created into our available list
